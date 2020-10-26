@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import '../scss/components/Navigation.scss';
 
 const Navigation = () => {
@@ -6,19 +7,32 @@ const Navigation = () => {
     <aside className='navigation'>
       <ul>
         <li>
-          <a href='#' className='navigation__link navigation__link--active'>
+          <NavLink
+            exact
+            to='/'
+            activeClassName='navigation__link--active'
+            className='navigation__link'
+          >
             New Realeses
-          </a>
+          </NavLink>
         </li>
         <li>
-          <a href='#' className='navigation__link'>
+          <NavLink
+            activeClassName='navigation__link--active'
+            to='/best'
+            className='navigation__link'
+          >
             Best Movies
-          </a>
+          </NavLink>
         </li>
         <li>
-          <a href='#' className='navigation__link'>
+          <NavLink
+            activeClassName='navigation__link--active'
+            to='favorite'
+            className='navigation__link'
+          >
             Favorite
-          </a>
+          </NavLink>
         </li>
       </ul>
     </aside>

@@ -4,6 +4,8 @@ import './scss/components/App.scss';
 import Header from './components/Header';
 import Navigation from './components/Navigation';
 import NewReleases from './components/NewReleases';
+import { Route, Switch } from 'react-router-dom';
+import SearchBlock from './components/SearchBlock';
 
 function App() {
   return (
@@ -14,7 +16,10 @@ function App() {
           <div className='content__wrapper'>
             <Navigation />
             <main className='main'>
-              <NewReleases />
+              <Switch>
+                <Route exact path='/' component={NewReleases} />
+                <Route path='/search' component={SearchBlock} />
+              </Switch>
             </main>
           </div>
         </div>

@@ -1,52 +1,10 @@
 .new-releases {
   &__title {
-    margin-bottom: 25px;
   }
 
   &__content {
-    display: flex;
-    width: 100%;
   }
 
   &__movie {
-  }
-}
-
-.movie {
-  position: relative;
-  flex: 0 0 25%;
-  color: #d9dde0;
-  &__rating {
-    background-color: orange;
-    display: inline;
-    padding: 10px;
-    border-radius: 50%;
-    font-size: 18px;
-    position: absolute;
-    left: 50%;
-    top: -10px;
-    transform: translate(-50%);
-    color: #fff;
-  }
-
-  &__poster {
-    width: 100%;
-    height: 210px;
-    box-shadow: 3px 5px 5px rgba(0, 0, 0, 0.7);
-  }
-
-  &__name {
-    font-size: 20px;
-    letter-spacing: 0.7px;
-    margin-top: 10px;
-  }
-
-  &__genres {
-    display: flex;
-    margin-top: 5px;
-    & li {
-      letter-spacing: 0.5px;
-      margin-right: 5px;
-    }
   }
 }

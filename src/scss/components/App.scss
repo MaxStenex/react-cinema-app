@@ -9,12 +9,6 @@ body {
   padding: 0px 30px;
 }
 
-.section-title {
-  font-size: 35px;
-  color: #d9dde0;
-  margin-top: 45px;
-}
-
 .container {
   max-width: 1024px;
   padding: 0px 10px;
@@ -25,5 +19,64 @@ body {
   &__wrapper {
     display: flex;
     min-height: 80vh;
+  }
+}
+
+.films-section {
+  &__content {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+  }
+  &__title {
+    font-size: 35px;
+    color: #d9dde0;
+    margin-top: 45px;
+    margin-bottom: 25px;
+  }
+}
+
+.movie {
+  position: relative;
+  flex: 1 0 20%;
+  color: #d9dde0;
+  margin-right: 25px;
+  margin-bottom: 25px;
+  max-width: 167px;
+  &:nth-child(4n) {
+    margin-right: 0;
+  }
+  &__rating {
+    background-color: orange;
+    display: inline;
+    padding: 10px;
+    border-radius: 50%;
+    font-size: 18px;
+    position: absolute;
+    left: 50%;
+    top: -10px;
+    transform: translate(-50%);
+    color: #fff;
+  }
+
+  &__poster {
+    width: 100%;
+    height: 210px;
+    box-shadow: 3px 5px 5px rgba(0, 0, 0, 0.7);
+  }
+
+  &__name {
+    font-size: 20px;
+    letter-spacing: 0.7px;
+    margin-top: 10px;
+  }
+
+  &__genres {
+    display: flex;
+    margin-top: 5px;
+    & li {
+      letter-spacing: 0.5px;
+      margin-right: 5px;
+    }
   }
 }
