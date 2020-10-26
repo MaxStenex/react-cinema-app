@@ -1,0 +1,32 @@
+.navigation {
+  background-color: #191c1f;
+  padding-top: 40px;
+  flex: 0 0 200px;
+  &__link {
+    font-size: 20px;
+    color: #d9dde0;
+    width: 100%;
+    display: block;
+    padding: 15px 15px;
+    position: relative;
+    transition: 0.3s ease-in;
+    &:not(&--active):hover {
+      background-color: #333333;
+    }
+    &--active {
+      background-color: #222b31;
+      color: #fcbabf;
+      &::after {
+        content: '';
+        display: block;
+        position: absolute;
+        right: 0;
+        top: 13px;
+        right: 0;
+        background: url(../../assets/arrow.svg) no-repeat;
+        width: 30px;
+        height: 30px;
+      }
+    }
+  }
+}

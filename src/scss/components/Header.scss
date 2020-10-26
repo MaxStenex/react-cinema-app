@@ -1,0 +1,41 @@
+.header {
+  background-color: #ff3645;
+  &__wrapper {
+    display: flex;
+    align-items: center;
+  }
+
+  &__logo {
+    padding: 10px 0px;
+    text-align: center;
+    & img {
+      width: 60px;
+      height: 60px;
+    }
+    flex: 0 0 200px;
+    margin-right: 35px;
+  }
+
+  &__search {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    & input {
+      background-color: #fcbabf;
+      font-size: 18px;
+      color: #fff;
+      display: block;
+      margin-left: 15px;
+      color: #000;
+      width: 100%;
+      padding: 5px 15px 5px 10px;
+      border-radius: 5px;
+      &::placeholder {
+        color: #000;
+      }
+    }
+    & button {
+      background-color: inherit;
+    }
+  }
+}

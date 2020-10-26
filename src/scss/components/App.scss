@@ -1,0 +1,29 @@
+body {
+  background-color: #222b31;
+  color: #d9dde0;
+  font-family: 'Roboto', sans-serif;
+}
+
+.main {
+  width: 100%;
+  padding: 0px 30px;
+}
+
+.section-title {
+  font-size: 35px;
+  color: #d9dde0;
+  margin-top: 45px;
+}
+
+.container {
+  max-width: 1024px;
+  padding: 0px 10px;
+  margin: 0 auto;
+}
+
+.content {
+  &__wrapper {
+    display: flex;
+    min-height: 80vh;
+  }
+}
