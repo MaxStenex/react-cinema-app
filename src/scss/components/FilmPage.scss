@@ -1,0 +1,50 @@
+.film {
+  font-size: 18px;
+  line-height: 1.3;
+  &__title {
+  }
+
+  &__main-wrapper {
+    display: flex;
+    margin-bottom: 15px;
+  }
+
+  &__poster {
+    width: 350px;
+    height: 400px;
+    margin-right: 15px;
+  }
+
+  &__info {
+  }
+
+  &__rating {
+    margin-bottom: 10px;
+  }
+
+  &__duration {
+    margin-bottom: 10px;
+  }
+
+  &__genres {
+    display: flex;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+    & span {
+      margin-right: 5px;
+    }
+    & ul {
+      display: flex;
+      & li {
+        margin-right: 13px;
+      }
+    }
+  }
+
+  &__production-countries {
+  }
+
+  &__overview {
+  }
+}

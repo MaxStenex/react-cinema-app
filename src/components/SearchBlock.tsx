@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { rootReducerType } from '../store';
+import { RootReducerType } from '../store';
 import { Film } from '../types';
 import Movie from './Movie';
 
@@ -21,7 +21,7 @@ const SearchBlock: React.FC<SearchBlockType> = ({ films }) => {
   );
 };
 
-const mapStateToProps = ({ searchBlock }: rootReducerType) => {
+const mapStateToProps = ({ searchBlock }: RootReducerType) => {
   return {
     films: searchBlock,
   };

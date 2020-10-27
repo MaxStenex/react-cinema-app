@@ -6,5 +6,4 @@ export type Film = {
   releaseDate: string;
   genreIds: Array<number>;
   smallPoster: string;
-  bigPoster: string;
 };

@@ -10,6 +10,11 @@ import { Film } from '../types';
 
 const Header: React.FC = ({ setSearchedFilms }: any) => {
   const history = useHistory();
+  const onEnterSearch = (evt: React.KeyboardEvent<HTMLInputElement>) => {
+    if (evt.key === 'Enter') {
+      onSearchFilms(searchText);
+    }
+  };
   const [searchText, setSearchText] = React.useState('');
   const onSearchFilms = (searchText: string) => {
     api
@@ -27,7 +32,6 @@ const Header: React.FC = ({ setSearchedFilms }: any) => {
             releaseDate: film.release_date,
             genreIds: film.genre_ids,
             smallPoster: film.poster_path,
-            bigPoster: film.backdrop_path,
           });
           return film;
         });
@@ -58,6 +62,7 @@ const Header: React.FC = ({ setSearchedFilms }: any) => {
               placeholder='Search movies'
               value={searchText}
               onChange={(evt) => setSearchText(evt.currentTarget.value)}
+              onKeyPress={onEnterSearch}
             />
           </div>
         </div>
