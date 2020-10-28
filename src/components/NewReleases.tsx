@@ -1,25 +1,61 @@
 import React from 'react';
+import { RootReducerType } from '../store';
+import { connect } from 'react-redux';
+import api, { apiKey } from '../api';
+import { setNewReleases } from '../ducks/newReleases';
 import '../scss/components/NewReleases.scss';
-import TestPoster from '../assets/poster.jpg';
-import { Link } from 'react-router-dom';
+import { Film } from '../types';
+import Movie from './Movie';
 
-const NewReleases = () => {
+type ReduxTypes = {
+  newReleases: Array<Film>;
+  setNewReleases: (films: Array<Film>) => any;
+};
+
+type NewReleasesType = ReduxTypes;
+
+const NewReleases: React.FC<NewReleasesType> = ({
+  setNewReleases,
+  newReleases,
+}) => {
+  React.useEffect(() => {
+    api
+      .get(
+        `movie/now_playing?api_key=${apiKey}&language=en-US&page=1&region=ru`
+      )
+      .then((response) => {
+        const newReleases: Array<Film> = [];
+        response.data.results.map((film: any) => {
+          newReleases.push({
+            id: film.id,
+            title: film.title,
+            rating: film.vote_average,
+            overview: film.overview,
+            releaseDate: film.release_date,
+            smallPoster: film.poster_path,
+          });
+          return film;
+        });
+        setNewReleases(newReleases);
+      });
+  }, []);
+
   return (
     <section className='new-releases films-section'>
       <h2 className='new-releases__title films-section__title'>New Releases</h2>
       <div className='new-releases__content films-section__content'>
-        <Link to='/' className='new-releases__movie movie'>
-          <div className='movie__rating '>7,9</div>
-          <img src={TestPoster} alt='poster' className='movie__poster ' />
-          <h3 className='movie__name '>Warcraft</h3>
-          <ul className='movie__genres'>
-            <li>Mystery</li>
-            <li>Thriller</li>
-          </ul>
-        </Link>
+        {newReleases.map((film) => {
+          return <Movie {...film} key={film.id} />;
+        })}
       </div>
     </section>
   );
 };
 
-export default NewReleases;
+const mapStateToProps = ({ newReleases }: RootReducerType) => {
+  return {
+    newReleases,
+  };
+};
+
+export default connect(mapStateToProps, { setNewReleases })(NewReleases);

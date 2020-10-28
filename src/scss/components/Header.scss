@@ -30,16 +30,24 @@
       width: 100%;
       padding: 5px 15px 5px 10px;
       border-radius: 5px;
+      transition: 0.3s;
       &::placeholder {
         color: #000;
+      }
+      &:focus {
+        background-color: #fcd4d6;
       }
     }
     & button {
       background-color: inherit;
       padding: 8px;
       border-radius: 50%;
+      transition: 0.3s ease-in-out;
       &:hover {
         background-color: darken($color: #ff3645, $amount: 15);
+      }
+      &:active {
+        transform: scale(0.9);
       }
     }
   }

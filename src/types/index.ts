@@ -4,6 +4,5 @@ export type Film = {
   rating: number;
   overview: string;
   releaseDate: string;
-  genreIds: Array<number>;
   smallPoster: string;
 };
