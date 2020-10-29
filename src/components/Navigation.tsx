@@ -28,7 +28,7 @@ const Navigation = () => {
         <li>
           <NavLink
             activeClassName='navigation__link--active'
-            to='favorite'
+            to='/favorite'
             className='navigation__link'
           >
             Favorite

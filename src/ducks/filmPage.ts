@@ -1,16 +1,9 @@
+import { FilmDetails } from '../types';
+
 const SET_FILM = 'SET_FILM';
 
-export type FilmDetails = {
-  title: string;
-  rating: null | number;
-  duration: null | number;
-  filmGenres: Array<{ id: number; name: string }>;
-  productionCountries: Array<string>;
-  overview: string;
-  poster: string;
-};
-
 const initialState: FilmDetails = {
+  id: null,
   title: '',
   rating: null,
   duration: null,

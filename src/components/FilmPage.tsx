@@ -3,9 +3,13 @@ import '../scss/components/FilmPage.scss';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import api, { apiKey } from '../api';
 import { connect } from 'react-redux';
-import { FilmDetails, setFilm } from '../ducks/filmPage';
+import { setFilm } from '../ducks/filmPage';
 import { RootReducerType } from '../store';
 import PosterNotFound from '../assets/posterNotFound.jpg';
+import Star from '../assets/star.svg';
+import { toggleFavoriteFilm } from '../ducks/favorite';
+import Delete from '../assets/delete.svg';
+import { FilmDetails } from '../types';
 
 type PathParamsType = {
   id: string;
@@ -14,17 +18,28 @@ type PathParamsType = {
 type ReduxType = {
   film: FilmDetails;
   setFilm: (FilmDetails: FilmDetails) => any;
+  toggleFavoriteFilm: (filmId: number | null) => any;
+  favoriteFilms: Set<number | null>;
 };
 
 type FilmPageType = RouteComponentProps<PathParamsType> & ReduxType;
 
-const FilmPage: React.FC<FilmPageType> = ({ match, setFilm, film }) => {
+const FilmPage: React.FC<FilmPageType> = ({
+  match,
+  setFilm,
+  film,
+  toggleFavoriteFilm,
+  favoriteFilms,
+}) => {
+  const isFavorite: boolean = favoriteFilms.has(film.id) ? true : false;
+
   React.useEffect(() => {
     api
       .get(`movie/${match.params.id}?api_key=${apiKey}&language=en-US`)
       .then((response) => {
         const data = response.data;
         setFilm({
+          id: data.id,
           title: data.title,
           rating: data.vote_average,
           duration: data.runtime,
@@ -35,25 +50,40 @@ const FilmPage: React.FC<FilmPageType> = ({ match, setFilm, film }) => {
           overview: data.overview,
           poster: data.poster_path,
         });
+      })
+      .catch((error) => {
+        console.log(error);
       });
-  }, [match.params.id]);
+  }, [match.params.id, setFilm]);
 
   return (
     <section className='film'>
       <h2 className='film__title films-section__title'>{film.title}</h2>
       <div className='film__main-wrapper'>
-        <img
-          src={
-            film.poster
-              ? `http://image.tmdb.org/t/p/w500/${film.poster}`
-              : PosterNotFound
-          }
-          alt=''
-          className='film__poster'
-        />
+        <div className='film__poster poster'>
+          <img
+            src={
+              film.poster
+                ? `http://image.tmdb.org/t/p/w500/${film.poster}`
+                : PosterNotFound
+            }
+            alt=''
+            className='poster__image'
+          />
+          <button
+            onClick={() => toggleFavoriteFilm(film.id)}
+            className='poster__button'
+          >
+            <span>
+              {isFavorite ? 'Remove from favorite' : 'Add to favorite'}
+            </span>
+            <img src={isFavorite ? Delete : Star} alt='' />
+          </button>
+        </div>
+
         <div className='film__info'>
           <div className='film__rating'>
-            Rating: <span>{film.rating} / 10</span>
+            <span>Rating : {film.rating} / 10</span>
           </div>
           <div className='film__duration'>Duration : {film.duration} min</div>
           <div className='film__genres'>
@@ -65,8 +95,12 @@ const FilmPage: React.FC<FilmPageType> = ({ match, setFilm, film }) => {
             </ul>
           </div>
           <div className='film__production-countries'>
-            Prodiction countries :{' '}
-            {film.productionCountries.map((country: string) => country)}
+            <span>Prodiction countries : </span>
+            <ul>
+              {film.productionCountries.map((country: string) => (
+                <li key={country}>{country}</li>
+              ))}
+            </ul>
           </div>
         </div>
       </div>
@@ -75,10 +109,13 @@ const FilmPage: React.FC<FilmPageType> = ({ match, setFilm, film }) => {
   );
 };
 
-const mapStateToProps = ({ filmPage }: RootReducerType) => {
+const mapStateToProps = ({ filmPage, favoriteFilms }: RootReducerType) => {
   return {
+    favoriteFilms: favoriteFilms,
     film: filmPage,
   };
 };
 
-export default withRouter(connect(mapStateToProps, { setFilm })(FilmPage));
+export default withRouter(
+  connect(mapStateToProps, { setFilm, toggleFavoriteFilm })(FilmPage)
+);

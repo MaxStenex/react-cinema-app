@@ -7,6 +7,7 @@ import NewReleases from './components/NewReleases';
 import { Route, Switch } from 'react-router-dom';
 import SearchBlock from './components/SearchBlock';
 import FilmPage from './components/FilmPage';
+import FavoritePage from './components/FavoritePage';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
                 <Route exact path='/' component={NewReleases} />
                 <Route path='/search' component={SearchBlock} />
                 <Route path='/film/:id?' component={FilmPage} />
+                <Route path='/favorite/' component={FavoritePage} />
               </Switch>
             </main>
           </div>

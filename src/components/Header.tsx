@@ -23,6 +23,7 @@ const Header: React.FC = ({ setSearchedFilms }: any) => {
       )
       .then((response) => {
         const filmsArray: Array<Film> = [];
+
         response.data.results.map((film: any) => {
           filmsArray.push({
             id: film.id,
