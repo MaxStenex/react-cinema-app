@@ -30,15 +30,13 @@ const NewReleases: React.FC<NewReleasesType> = ({
             id: film.id,
             title: film.title,
             rating: film.vote_average,
-            overview: film.overview,
-            releaseDate: film.release_date,
             smallPoster: film.poster_path,
           });
           return film;
         });
         setNewReleases(newReleases);
       });
-  }, []);
+  }, [setNewReleases]);
 
   return (
     <section className='new-releases films-section'>

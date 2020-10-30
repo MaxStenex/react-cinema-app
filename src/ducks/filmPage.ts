@@ -29,7 +29,14 @@ export default function reducer(
 
 type FilmPageActionTypes = ReturnType<typeof setFilm>;
 
-export const setFilm = (film: FilmDetails) => {
+type SetFilmType = {
+  type: typeof SET_FILM;
+  payload: {
+    film: FilmDetails;
+  };
+};
+
+export const setFilm = (film: FilmDetails): SetFilmType => {
   return {
     type: SET_FILM,
     payload: {

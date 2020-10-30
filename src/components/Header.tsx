@@ -29,8 +29,6 @@ const Header: React.FC = ({ setSearchedFilms }: any) => {
             id: film.id,
             title: film.title,
             rating: film.vote_average,
-            overview: film.overview,
-            releaseDate: film.release_date,
             smallPoster: film.poster_path,
           });
           return film;
