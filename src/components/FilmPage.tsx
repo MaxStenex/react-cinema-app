@@ -10,6 +10,7 @@ import Star from '../assets/star.svg';
 import { toggleFavoriteFilm } from '../ducks/favorite';
 import Delete from '../assets/delete.svg';
 import { FilmDetails } from '../types';
+import Loader from './Loader';
 
 type PathParamsType = {
   id: string;
@@ -32,8 +33,9 @@ const FilmPage: React.FC<FilmPageType> = ({
   favoriteFilms,
 }) => {
   const isFavorite: boolean = favoriteFilms.has(film.id) ? true : false;
-
+  const [loading, setLoading] = React.useState(false);
   React.useEffect(() => {
+    setLoading(true);
     api
       .get(`movie/${match.params.id}?api_key=${apiKey}&language=en-US`)
       .then((response) => {
@@ -50,13 +52,17 @@ const FilmPage: React.FC<FilmPageType> = ({
           overview: data.overview,
           poster: data.poster_path,
         });
+        setLoading(false);
       })
       .catch((error) => {
         console.log(error);
+        setLoading(false);
       });
   }, [match.params.id, setFilm]);
 
-  return (
+  return loading ? (
+    <Loader />
+  ) : (
     <section className='film'>
       <h2 className='film__title films-section__title'>{film.title}</h2>
       <div className='film__main-wrapper'>

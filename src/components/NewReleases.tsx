@@ -6,6 +6,7 @@ import { setNewReleases } from '../ducks/newReleases';
 import '../scss/components/NewReleases.scss';
 import { Film } from '../types';
 import Movie from './Movie';
+import Loader from './Loader';
 
 type ReduxTypes = {
   newReleases: Array<Film>;
@@ -18,7 +19,10 @@ const NewReleases: React.FC<NewReleasesType> = ({
   setNewReleases,
   newReleases,
 }) => {
+  const [loading, setLoading] = React.useState(true);
+
   React.useEffect(() => {
+    setLoading(true);
     api
       .get(
         `movie/now_playing?api_key=${apiKey}&language=en-US&page=1&region=ru`
@@ -35,10 +39,17 @@ const NewReleases: React.FC<NewReleasesType> = ({
           return film;
         });
         setNewReleases(newReleases);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        setLoading(false);
       });
   }, [setNewReleases]);
 
-  return (
+  return loading === true ? (
+    <Loader />
+  ) : (
     <section className='new-releases films-section'>
       <h2 className='new-releases__title films-section__title'>New Releases</h2>
       <div className='new-releases__content films-section__content'>

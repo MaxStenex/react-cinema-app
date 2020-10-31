@@ -15,8 +15,11 @@ const Header: React.FC = ({ setSearchedFilms }: any) => {
       onSearchFilms(searchText);
     }
   };
+  const [loading, setLoading] = React.useState(false);
   const [searchText, setSearchText] = React.useState('');
   const onSearchFilms = (searchText: string) => {
+    if (searchText.trim() === '') return;
+    setLoading(true);
     api
       .get(
         `search/movie?api_key=${apiKey}&language=en-US&query=${searchText}&page=1&include_adult=false&region=ru`
@@ -34,6 +37,7 @@ const Header: React.FC = ({ setSearchedFilms }: any) => {
           return film;
         });
         setSearchedFilms(filmsArray);
+        setLoading(false);
       });
     setSearchText('');
     history.push('/search');
@@ -43,7 +47,7 @@ const Header: React.FC = ({ setSearchedFilms }: any) => {
     <header className='header'>
       <div className='container'>
         <div className='header__wrapper'>
-          <Link to='/' className='header__logo' href='#'>
+          <Link to='/' className='header__logo'>
             <img src={Logo} alt='logo' />
           </Link>
           <div className='header__search'>
@@ -57,10 +61,11 @@ const Header: React.FC = ({ setSearchedFilms }: any) => {
             <input
               type='text'
               className=''
-              placeholder='Search movies'
+              placeholder={loading ? 'Loading...' : 'Search movies'}
               value={searchText}
               onChange={(evt) => setSearchText(evt.currentTarget.value)}
               onKeyPress={onEnterSearch}
+              disabled={loading}
             />
           </div>
         </div>

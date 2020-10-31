@@ -3,13 +3,16 @@ import { connect } from 'react-redux';
 import { RootReducerType } from '../store';
 import { Film } from '../types';
 import Movie from './Movie';
+import NothingFound from './NothingFound';
 
-type SearchBlockType = {
+type Props = {
   films: Array<Film>;
 };
 
-const SearchBlock: React.FC<SearchBlockType> = ({ films }) => {
-  return (
+const SearchBlock: React.FC<Props> = ({ films }) => {
+  return films.length === 0 ? (
+    <NothingFound />
+  ) : (
     <section className='search-block films-section'>
       <h2 className='search-block__title films-section__title'>Search</h2>
       <div className='search-block__content films-section__content'>

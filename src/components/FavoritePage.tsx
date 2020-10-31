@@ -4,6 +4,7 @@ import api, { apiKey } from '../api';
 import { setFavoritePage } from '../ducks/favoritePage';
 import { RootReducerType } from '../store';
 import { Film } from '../types';
+import Loader from './Loader';
 import Movie from './Movie';
 
 type ReduxType = {
@@ -19,28 +20,38 @@ const FavoritePage: React.FC<FavoritePageType> = ({
   setFavoritePage,
   favoritePageFilms,
 }) => {
+  const [loading, setLoading] = React.useState(false);
   React.useEffect(() => {
+    setLoading(true);
     const films: Array<number | null> = Array.from(favoriteFilms);
     Promise.all(
       films.map((film) => {
         return api.get(`movie/${film}?api_key=${apiKey}&language=en-US`);
       })
-    ).then((response) => {
-      const films: Array<Film> = [];
-      response.map((film: any) => {
-        films.push({
-          id: film.data.id,
-          title: film.data.title,
-          rating: film.data.vote_average,
-          smallPoster: film.data.poster_path,
+    )
+      .then((response) => {
+        const films: Array<Film> = [];
+        response.map((film: any) => {
+          films.push({
+            id: film.data.id,
+            title: film.data.title,
+            rating: film.data.vote_average,
+            smallPoster: film.data.poster_path,
+          });
+          return film;
         });
-        return film;
+        setFavoritePage(films);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        setLoading(false);
       });
-      setFavoritePage(films);
-    });
   }, [favoriteFilms, setFavoritePage]);
 
-  return (
+  return loading ? (
+    <Loader />
+  ) : (
     <section className='new-releases films-section'>
       <h2 className='new-releases__title films-section__title'>New Releases</h2>
       <div className='new-releases__content films-section__content'>
