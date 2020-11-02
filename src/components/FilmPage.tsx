@@ -1,11 +1,11 @@
 import React from 'react';
 import '../scss/components/FilmPage.scss';
-import { RouteComponentProps, withRouter } from 'react-router-dom';
+import { RouteComponentProps, useHistory, withRouter } from 'react-router-dom';
 import api, { apiKey } from '../api';
 import { connect } from 'react-redux';
 import { setFilm } from '../ducks/filmPage';
 import { RootReducerType } from '../store';
-import PosterNotFound from '../assets/posterNotFound.jpg';
+import PosterNotFound from '../assets/posterNotFound.png';
 import Star from '../assets/star.svg';
 import { toggleFavoriteFilm } from '../ducks/favorite';
 import Delete from '../assets/delete.svg';
@@ -34,6 +34,7 @@ const FilmPage: React.FC<FilmPageType> = ({
 }) => {
   const isFavorite: boolean = favoriteFilms.has(film.id) ? true : false;
   const [loading, setLoading] = React.useState(false);
+  const history = useHistory();
   React.useEffect(() => {
     setLoading(true);
     api
@@ -55,10 +56,10 @@ const FilmPage: React.FC<FilmPageType> = ({
         setLoading(false);
       })
       .catch((error) => {
-        console.log(error);
+        history.push('/nothing-found');
         setLoading(false);
       });
-  }, [match.params.id, setFilm]);
+  }, [match.params.id]);
 
   return loading ? (
     <Loader />

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Film } from '../types';
-import PosterNotFound from '../assets/posterNotFound.jpg';
+import PosterNotFound from '../assets/posterNotFound.png';
 
 const Movie: React.FC<Film> = ({ id, title, rating, smallPoster }) => {
   return (

@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 import api, { apiKey } from '../api';
-import Logo from '../assets/logo.svg';
+import Logo from '../assets/logo.jpg';
 import Search from '../assets/search.svg';
 import { setSearchedFilms } from '../ducks/searchBlock';
 import '../scss/components/Header.scss';
@@ -26,7 +26,6 @@ const Header: React.FC = ({ setSearchedFilms }: any) => {
       )
       .then((response) => {
         const filmsArray: Array<Film> = [];
-
         response.data.results.map((film: any) => {
           filmsArray.push({
             id: film.id,
@@ -55,6 +54,7 @@ const Header: React.FC = ({ setSearchedFilms }: any) => {
               onClick={() => {
                 onSearchFilms(searchText);
               }}
+              disabled={loading}
             >
               <img src={Search} alt='search' />
             </button>

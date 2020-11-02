@@ -8,6 +8,7 @@ import { Route, Switch } from 'react-router-dom';
 import SearchBlock from './components/SearchBlock';
 import FilmPage from './components/FilmPage';
 import FavoritePage from './components/FavoritePage';
+import NothingFound from './components/NothingFound';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
                 <Route path='/search' component={SearchBlock} />
                 <Route path='/film/:id?' component={FilmPage} />
                 <Route path='/favorite/' component={FavoritePage} />
+                <Route component={NothingFound} />
               </Switch>
             </main>
           </div>
