@@ -10,7 +10,7 @@ const Movie: React.FC<Film> = ({ id, title, rating, smallPoster }) => {
       <img
         src={
           smallPoster
-            ? `http://image.tmdb.org/t/p/w185/${smallPoster}`
+            ? `http://image.tmdb.org/t/p/w200/${smallPoster}`
             : PosterNotFound
         }
         alt='poster'

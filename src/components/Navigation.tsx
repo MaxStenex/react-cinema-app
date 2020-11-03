@@ -1,10 +1,22 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import '../scss/components/Navigation.scss';
+import MenuIcon from '../assets/menu.svg';
+import CloseIcon from '../assets/close.svg';
 
 const Navigation = () => {
+  const [closed, setClosed] = React.useState(true);
+
   return (
-    <aside className='navigation'>
+    <aside className={`navigation ` + (closed ? '' : 'navigation--opened')}>
+      <button
+        className='navigation__close'
+        onClick={() => {
+          setClosed(!closed);
+        }}
+      >
+        <img src={closed ? MenuIcon : CloseIcon} alt='menu' />
+      </button>
       <ul>
         <li>
           <NavLink
@@ -14,15 +26,6 @@ const Navigation = () => {
             className='navigation__link'
           >
             New Realeses
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            activeClassName='navigation__link--active'
-            to='/best'
-            className='navigation__link'
-          >
-            Best Movies
           </NavLink>
         </li>
         <li>

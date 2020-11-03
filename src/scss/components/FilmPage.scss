@@ -4,11 +4,17 @@
   &__title {
     font-weight: 700;
     letter-spacing: 1.5px;
+    @media (max-width: 1024px) {
+      text-align: center;
+    }
   }
 
   &__main-wrapper {
     display: flex;
     margin-bottom: 15px;
+    @media (max-width: 1024px) {
+      flex-wrap: wrap;
+    }
   }
 
   &__poster {
@@ -39,6 +45,7 @@
     }
     & ul {
       display: flex;
+      flex-wrap: wrap;
       & li {
         margin-right: 13px;
       }
@@ -55,11 +62,22 @@
 
 .poster {
   position: relative;
+  @media (max-width: 1024px) {
+    flex: 1 1 400px;
+    margin: 0 auto;
+    margin-bottom: 30px;
+    max-width: 550px;
+  }
   &__image {
     width: 350px;
     max-height: 400px;
     border-radius: 5px;
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.7);
+    @media (max-width: 1024px) {
+      max-height: none;
+      height: 450px;
+      width: 100%;
+    }
   }
   &__button {
     height: 40px;
